@@ -1,9 +1,16 @@
+import argparse
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.utils.data as data_utils
+import torch.optim as optim
+from torchvision import datasets, transforms
+from torch.autograd import Variable
 import numpy as np
+import time
 
 file = np.load("data/data_all.npz")
 
-X_train, X_test, y_train, y_test = file['X_train'], file['X_test'], file['y_train'], file['y_test']
-print(X_train.shape)
-print(X_test.shape)
-print(y_train.shape)
-print(y_test.shape)
+x_train = file['X_train']
+x_train = torch.tensor(x_train, dtype=torch.float32)
+x_train /= 255
